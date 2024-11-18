@@ -1,0 +1,87 @@
+<div class="container text-center">
+    <h2>CRUD MASCOTA</h2>
+</div>
+
+
+
+<div class="row m-5">
+    <div class="col">
+        <table id="dtMascota" class="table table-striped" style="width: 100%;">
+            <thead>
+                
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of datatable">
+                
+                    <td>{{ item.idMascota }}</td>
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.edad }}</td>
+                    <td>{{ item.descripcion }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" (click)="showDialog()"
+                            ><i class="fa-solid fa-plus"></i></button>
+                        <!-- <button class="btn btn-success" type="button" (click)="onAddMascota(mascota)"><i class="fa-solid fa-plus"></i></button> -->
+                        <!-- <button class="btn btn-warning m-2" type="button" (click)="onUpdateMascota(mascota)"><i
+                                class="fa-solid fa-pen-to-square"></i></button> -->
+                        <button class="btn btn-warning m-2" type="button" (click)="editar(item)"><i
+                                    class="fa-solid fa-pen-to-square"></i></button> 
+                        <button class="btn btn-danger " type="button" (click)="ondeleteMascota(item.idMascota)"><i
+                                class="fa-solid fa-trash"></i></button>
+                        <!-- <button class="btn btn-primary m-2" type="button" (click)="clear()"><i
+                                class="fa-solid fa-broom"></i></button> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<p-dialog header="Agregar Contacto Emergencia" [(visible)]="visible" [style]="{ width: '40vw'}" [modal]="true">
+    <div class=" col-12 sm:col-12 md:col-12 lg:col-12">
+        <div class="grid">
+            <div class="col-12 md:col-6 lg:col-6">
+                <div class="p-field">
+                    
+                    <label for="txtId" class="form-label">ID</label>
+                        <input type="text" name="id" id="txtId" class="form-control" [(ngModel)]="mascota.id"
+                        required="true" disabled="true" pInputText style="text-transform:uppercase">
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-6">
+                <div class="p-field">
+                    <label for="txtNombre" class="form-label">Nombre</label>
+                    <input type="text" name="id" id="txtNombre" class="form-control" [(ngModel)]="mascota.nombre"
+                    required="true" pInputText style="text-transform:uppercase">
+
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-6">
+                <div class="p-field">
+                    <label for="txtEdad" class="form-label">Edad</label>
+                        <input type="text" name="id" id="txtEdad" class="form-control" [(ngModel)]="mascota.edad"
+                        required="true" >
+                    </div>
+            </div>
+            <div class="col-12 md:col-6">
+                <div class="p-field fluid">
+                    <label for="txtDesc" class="form-label">Descripción</label>
+                    <input type="text" name="id" id="txtDesc" class="form-control"
+                        [(ngModel)]="mascota.descripcion"  required="true" pInputText style="text-transform:uppercase">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 md:col-6">
+        <button   class="btn btn-primary m-2" type="button" (click)="cerrarDialog()">Cancelar</button>
+        <button *ngIf=" editarMascota == false" class="btn btn-success m-2" type="button" (click)="onAddMascota(mascota)">Guardar</button>
+        <button *ngIf=" editarMascota == true" class="btn btn-success m-2" type="button" (click)="onUpdateMascota(mascota)">Guardar</button>
+    </div>
+
+</p-dialog>
